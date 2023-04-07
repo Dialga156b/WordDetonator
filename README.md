@@ -1,4 +1,4 @@
-# WordDetonator
+# ![alt text](https://github.com/Dialga156b/WordDetonator/blob/main/WordDetonator2.png?raw=true) WordDetonator  
 
 ### Hack for Jklm.fun's own WordBomb
 

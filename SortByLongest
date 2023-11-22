@@ -1,13 +1,13 @@
 socket.on('nextTurn', function(event) {
   let wordlist = [];
-
+  console.log("nextturn!")
   fetch('https://raw.githubusercontent.com/DO-Ui/bombparty-bot/master/wordlist.txt')
     .then(response => response.text())
     .then(data => {
       wordlist = data.split('\n');
     })
     .then(() => {
-      const syllableDiv = document.querySelector("body > div.main.page > div.middle > div.canvasArea > div.round > div");
+      const syllableDiv = document.querySelector(".syllable");
       if (syllableDiv !== null) {
         const syllableValue = syllableDiv.textContent;
         const lettersToCheck = [syllableValue];
@@ -20,7 +20,7 @@ socket.on('nextTurn', function(event) {
         // Sort the filtered word list in alphabetical order
         filteredWordList.sort();
 
-        const worddisplay = document.querySelector("body > div.main.page > div.middle > div.canvasArea > div.quickRules > div > span.dictionary")
+        const worddisplay = document.querySelector(".dictionary");
 
         // Update its value property
 

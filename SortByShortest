@@ -1,0 +1,43 @@
+socket.on('nextTurn', function(event) {
+  let wordlist = [];
+  console.log("nextturn!")
+  fetch('https://raw.githubusercontent.com/DO-Ui/bombparty-bot/master/wordlist.txt')
+    .then(response => response.text())
+    .then(data => {
+      wordlist = data.split('\n');
+    })
+    .then(() => {
+      const syllableDiv = document.querySelector(".syllable");
+      if (syllableDiv !== null) {
+        const syllableValue = syllableDiv.textContent;
+        const lettersToCheck = [syllableValue];
+
+        // Filter the word list to only include words that contain the specified letters
+        const filteredWordList = wordlist.filter(word =>
+          lettersToCheck.some(letter => word.includes(letter))
+        );
+
+        // Sort the filtered word list in alphabetical order
+        filteredWordList.sort();
+
+        const worddisplay = document.querySelector(".dictionary");
+
+        // Update its value property
+
+        console.log(filteredWordList);
+
+        var word = filteredWordList[Math.floor(Math.random() * filteredWordList.length)]; // random word
+        worddisplay.textContent = "Possible: " + word;
+
+        //disctionary style customizing
+        const dictionarySpan = document.querySelector('.dictionary') // the same as the word display but is shorter :)
+        dictionarySpan.style.color = 'orange';
+        worddisplay.style.fontWeight = "bold";
+
+
+        console.log(word);
+      } else {
+        console.log('Element with class "syllable" not found.');
+      }
+    });
+});

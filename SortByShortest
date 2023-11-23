@@ -26,9 +26,15 @@ socket.on('nextTurn', function(event) {
 
         console.log(filteredWordList);
 
-        var word = filteredWordList[Math.floor(Math.random() * filteredWordList.length)]; // random word
-        worddisplay.textContent = "Possible: " + word;
+        function sortByLength(a, b) {
+          return a.length - b.length;
+        }
 
+        var word = filteredWordList.sort(sortByLength)[0];
+
+        
+        // Sort the array using the custom function
+        //socket.emit("setWord",word,true)
         //disctionary style customizing
         const dictionarySpan = document.querySelector('.dictionary') // the same as the word display but is shorter :)
         dictionarySpan.style.color = 'orange';

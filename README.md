@@ -10,4 +10,4 @@ FOR SOME REASON BOOKMARKLETS DONT WORK YET AND TO ACTUALLY MAKE THE CODE WORK FO
 2. paste the code in console. hit enter. enjoy!
 
 humanizer is in beta so dont come at me
-how do i delete file?
+1. how do i delete file?

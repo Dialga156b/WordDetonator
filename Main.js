@@ -1,4 +1,4 @@
-(function() { // copyright uhh nobody 
+(function() {
     const guiContainer = document.createElement('div');
     guiContainer.style.position = 'fixed';
     guiContainer.style.top = '10px';
@@ -9,7 +9,7 @@
     guiContainer.style.borderRadius = '5px';
     document.body.appendChild(guiContainer);
 
-
+    var isDragging = false
     guiContainer.addEventListener('mousedown', function(e) {
         isDragging = true;
         offsetX = e.clientX - guiContainer.getBoundingClientRect().left;
@@ -29,7 +29,7 @@
         }
     });
 
-    
+
     // Adding Watermark Image
     const watermarkImage = document.createElement('img');
     watermarkImage.src = 'https://i.postimg.cc/X75Rdjw7/sai.png';
@@ -76,37 +76,29 @@
     // Create dropdown items and add them to the dropdown content
     var currentdictionary = 'https://raw.githubusercontent.com/DO-Ui/bombparty-bot/master/wordlist.txt'
     var items = [
-        "Default",
+        "Default Dictionary",
         "English Dictionary",
-        "Risky"
+        "Summit Dictionary",
+        "Scrabble's Dictionary"
     ];
     var links = [
         "https://raw.githubusercontent.com/DO-Ui/bombparty-bot/master/wordlist.txt",
         "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt",
-        "https://raw.githubusercontent.com/Kalaborative/JKLMBombpartyHelper/master/words.txt"
+        "https://raw.githubusercontent.com/Dialga156b/JKLMDynamicLibrary/main/JKLMDynamicConstruct",
+        "https://raw.githubusercontent.com/Dialga156b/JKLMDynamicLibrary/main/preexisting"
     ];
     items.forEach(function(itemText) {
-    var item = document.createElement("div");
-    item.className = "dropdown-item";
-    item.textContent = itemText;
-    item.style.color = 'white';
-    item.onclick = function() {
-        // Handle item click (you can customize this function)
-        console.log(itemText + " clicked");
-        if (itemText === items[0]){
-            currentdictionary = links[0];
-            DictionaryLabel.textContent = "Default Dataset"
+        var item = document.createElement("div");
+        item.className = "dropdown-item";
+        item.textContent = itemText;
+        item.style.color = 'white';
+        item.onclick = function() {
+            // Handle item click (you can customize this function)
+            console.log(itemText + " clicked");
+            currentdictionary = links[items.indexOf(itemText)];
+            DictionaryLabel.textContent = itemText
         };
-        if (itemText === items[1]){
-            currentdictionary = links[1];
-            DictionaryLabel.textContent = "E.W Dataset";
-        };
-        if (itemText === items[2]){
-            currentdictionary = links[2]
-            DictionaryLabel.textContent = "Risky Dataset";
-        }
-    };
-    dropdownContent.appendChild(item);
+        dropdownContent.appendChild(item);
     });
 
     guiContainer.appendChild(dropdownContent);
@@ -380,10 +372,10 @@
                     const lettersToCheck = [syllableValue];
 
                     // Filter the word list to only include words that contain the specified letters
+                    wordlist = wordlist.map(word => word.toLowerCase());
                     const filteredUnsortedWordList = wordlist.filter(word =>
                         lettersToCheck.some(letter => word.includes(letter))
                     );
-
 
                         async function typeText(index) {
                             await new Promise(resolve => setTimeout(resolve, getRandomInt(450, 750)));
@@ -419,9 +411,6 @@
                     let filteredWordList = filteredUnsortedWordList
 
                     if (failsafe === false) {
-
-                        // first try! user choice
-                        if (isHumanizerEnabled) {
                             if (currentSortMode === 1) {  // random
                                 filteredWordList = filteredUnsortedWordList;
                                 var word = filteredWordList[Math.ceil(Math.random() * filteredWordList.length)];
@@ -437,6 +426,8 @@
                                 var word = filteredWordList[0]; // shortest
                                 console.log("word reassigned")
                             } 
+                        // first try! user choice
+                        if (isHumanizerEnabled) {
                             sleep(getRandomInt(400, 800));                       
                         }
                         console.log(`found ${filteredWordList.length} words matching syllable ${syllableValue}`)

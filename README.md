@@ -1,5 +1,6 @@
 ### Hack for Jklm.fun WordBomb
 
+#####[ this code is deprecated and is no longer maintained. thank you ]
 ##### HOW TO USE:
 
 put code into chrome console or soem,thing

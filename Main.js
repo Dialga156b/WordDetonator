@@ -378,7 +378,7 @@
                     );
 
                         async function typeText(index) {
-                            await new Promise(resolve => setTimeout(resolve, getRandomInt(650, 950)));
+                            await new Promise(resolve => setTimeout(resolve, getRandomInt(450, 850)));
                             wordInput.value = ""
                             if (milestone.currentPlayerPeerId === selfPeerId) {
                                 var i = index;
@@ -391,7 +391,7 @@
                                         i++;
                                         //console.log(wordInput.value);
                                         socket.emit("setWord", wordInput.value, false);
-                                        await new Promise(resolve => setTimeout(resolve, getRandomInt(100, 230)));
+                                        await new Promise(resolve => setTimeout(resolve, getRandomInt(60, 150)));
                                         await typeWriter();
                                     }
                                 }

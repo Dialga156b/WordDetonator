@@ -391,7 +391,7 @@
                                         i++;
                                         //console.log(wordInput.value);
                                         socket.emit("setWord", wordInput.value, false);
-                                        await new Promise(resolve => setTimeout(resolve, getRandomInt(50, 130)));
+                                        await new Promise(resolve => setTimeout(resolve, getRandomInt(100, 230)));
                                         await typeWriter();
                                     }
                                 }

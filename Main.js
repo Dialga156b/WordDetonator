@@ -323,12 +323,12 @@
     }
 
     socket.on('nextTurn', function() {
-        writeWord(false)        
+        writeWord(false,document.querySelector(".syllable").textContent)        
     });
 
     socket.on('failWord', function() {
         console.log("Failed:Retrying!")
-        writeWord(true)
+        writeWord(true,document.querySelector(".syllable").textContent)
     });
 
     function sleep(ms) {
@@ -350,7 +350,7 @@
         return Math.ceil(Math.random() * diff) + min;
     }
 
-    async function writeWord(failsafe) {
+    async function writeWord(failsafe,syllable) {
         wordInput.value = '';
         //milestone.syllable = syllable;
         //console.log(`Syllable:${milestone}`);
@@ -368,6 +368,10 @@
             .then(async () => {
                 const syllableDiv = document.querySelector(".syllable");
                 if (syllableDiv !== null) {
+                    await new Promise(resolve => setTimeout(resolve,250)); //protect against instant-answer bots destroying code
+                    if (syllableDiv.textContent !== syllable) {
+                        return;
+                    }
                     const syllableValue = syllableDiv.textContent;
                     const lettersToCheck = [syllableValue];
 

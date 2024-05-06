@@ -355,6 +355,7 @@
         //milestone.syllable = syllable;
         //console.log(`Syllable:${milestone}`);
         //console.log(`~~~~~~~~~~~~~~~~~~~~~~`);
+        if (!checkbox1.checked) {return}
         let wordlist = [];
         let customURL = currentdictionary;
         console.log(`using dictionary ${customURL}`)

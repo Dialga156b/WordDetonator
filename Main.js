@@ -322,13 +322,14 @@
         guiContainer.style.display = (guiContainer.style.display === 'none') ? 'block' : 'none';
     }
 
-    socket.on('nextTurn', function() {
-        writeWord(false,document.querySelector(".syllable").textContent)        
+    socket.on('nextTurn', function(peerID) {
+        if (peerID !== selfPeerID)
+        writeWord(false,milestone.syllable)        
     });
 
     socket.on('failWord', function() {
         console.log("Failed:Retrying!")
-        writeWord(true,document.querySelector(".syllable").textContent)
+        writeWord(true,milestone.syllable)
     });
 
     function sleep(ms) {
@@ -354,7 +355,7 @@
         wordInput.value = '';
         //milestone.syllable = syllable;
         //console.log(`Syllable:${milestone}`);
-        //console.log(`~~~~~~~~~~~~~~~~~~~~~~`);
+        //console. log(`~~~~~~~~~~~~~~~~~~~~~~`);
         if (!checkbox1.checked) {return}
         let wordlist = [];
         let customURL = currentdictionary;
@@ -373,7 +374,7 @@
                     if (syllableDiv.textContent !== syllable) {
                         return;
                     }
-                    const syllableValue = syllableDiv.textContent;
+                    const syllableValue = milestone.syllable;
                     const lettersToCheck = [syllableValue];
 
                     // Filter the word list to only include words that contain the specified letters
@@ -405,7 +406,7 @@
                                 console.log(wordInput.value);
                             }
                             
-                            socket.emit("setWord", wordInput.value, true);
+                            socket.emit("setWord", word, true);
                         }
                         
                     
@@ -460,7 +461,7 @@
 
                     //console.log(`found ${filteredWordList.length} words matching syllable "${syllableValue}"`)
                     if (isAutoLeakEnabled) {
-                        socket.emit("chat",word)
+                        socket.emit("chat",word.trim())
                     }
                     if (isMasterEnabled === true) {
 

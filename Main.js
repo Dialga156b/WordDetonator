@@ -1,5 +1,5 @@
 // made by eaqualoti! 
-//thrown together haphazardly because i update it during school hours
+// thrown together haphazardly because
 // i'm updating this every now and then because it has strokes
 (function() {
   const guiContainer = document.createElement('div');
@@ -96,7 +96,6 @@
       item.textContent = itemText;
       item.style.color = 'white';
       item.onclick = function() {
-          // Handle item click (you can customize this function)
           console.log(itemText + " clicked");
           currentdictionary = links[items.indexOf(itemText)];
           DictionaryLabel.textContent = itemText
@@ -252,7 +251,7 @@
   guiContainer.appendChild(separatoragain);
 //--------------------------------------------------------------------// statuses
   const statusLabel = document.createElement('label');
-  statusLabel.textContent = 'Master: ';
+  statusLabel.textContent = 'Status: OFF';
   statusLabel.style.color = 'white';
   guiContainer.appendChild(statusLabel);
 
@@ -270,6 +269,24 @@
   watermark.textContent = 'Ctrl+K to toggle';
   watermark.style.color = 'white';
   watermarkContainer.appendChild(watermark);
+
+  const watermarkContainer2 = document.createElement('div');
+  guiContainer.appendChild(watermarkContainer2);
+
+
+  const watermark2 = document.createElement('label');
+  watermark2.textContent = 'Made by eaqualoti';
+  watermark2.style.color = 'white';
+  watermarkContainer2.appendChild(watermark2);
+
+  const watermarkContainer3 = document.createElement('div');
+  guiContainer.appendChild(watermarkContainer3);
+
+
+  const watermark3 = document.createElement('label');
+  watermark3.textContent = 'github.com/Dialga156b';
+  watermark3.style.color = 'white';
+  watermarkContainer3.appendChild(watermark3);
 
   //let milestone
   let isMasterEnabled = false;
@@ -314,7 +331,7 @@
       isHumanizerEnabled = checkbox3.checked;
       isAutoLeakEnabled = checkbox4.checked;
       searchMode = checkbox5.checked;
-      const statusText = `Master: ${isMasterEnabled ? 'ON' : 'Off'}`;
+      const statusText = `Status: ${isMasterEnabled ? 'ON' : 'Off'}`;
       statusLabel.textContent = statusText;
   }
 
@@ -382,36 +399,31 @@
                       lettersToCheck.some(letter => word.includes(letter))
                   );
 
-                      async function typeText(index) {
-                          await new Promise(resolve => setTimeout(resolve, getRandomInt(450, 850)));
-                          wordInput.value = ""
-                          if (milestone.currentPlayerPeerId === selfPeerId) {
-                              var i = index;
-                              var txt = word;
-                              console.log(word);
-                      
-                              async function typeWriter() {
-                                  if (i < txt.length) {
-                                      wordInput.value += txt.charAt(i);
-                                      i++;
-                                      //console.log(wordInput.value);
-                                      socket.emit("setWord", wordInput.value, false);
-                                      await new Promise(resolve => setTimeout(resolve, getRandomInt(20, 150)));
-                                      await typeWriter();
-                                  }
-                              }
-                      
-                              await typeWriter();
-                              console.log(wordInput.value);
-                          }
-                          
-                          socket.emit("setWord", word, true);
-                      }
-                      
-                  
-
-                  
-
+                  async function typeText(index) {
+                    await new Promise(resolve => setTimeout(resolve, getRandomInt(450, 850)));
+                    wordInput.value = ""
+                    if (milestone.currentPlayerPeerId === selfPeerId) {
+                        var i = index;
+                        var txt = word;
+                        console.log(word);
+                
+                        async function typeWriter() {
+                            if (i < txt.length) {
+                                wordInput.value += txt.charAt(i);
+                                i++;
+                                //console.log(wordInput.value);
+                                socket.emit("setWord", wordInput.value, false);
+                                await new Promise(resolve => setTimeout(resolve, getRandomInt(20, 150)));
+                                await typeWriter();
+                            }
+                        }
+                
+                        await typeWriter();
+                        console.log(wordInput.value);
+                    }
+                    
+                    socket.emit("setWord", word, true);
+                }
 
                   let filteredWordList = filteredUnsortedWordList
 

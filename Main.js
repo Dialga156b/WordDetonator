@@ -1,4 +1,5 @@
 // made by eaqualoti! 
+//thrown together haphazardly because i update it during school hours
 // i'm updating this every now and then because it has strokes
 (function() {
   const guiContainer = document.createElement('div');

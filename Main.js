@@ -323,7 +323,7 @@
     }
 
     socket.on('nextTurn', function(peerID) {
-        if (peerID !== selfPeerID)
+        //if (peerID !== selfPeerID)
         writeWord(false,milestone.syllable)        
     });
 
@@ -467,17 +467,8 @@
 
                         const worddisplay = document.querySelector(".dictionary");
 
-                        worddisplay.textContent = "Possible: " + word;
-
-                        // if (isAutoAnswerEnabled) {
-                        //     if (isHumanizerEnabled) {
-                        //         await sleep(getRandomInt(480, 700));
-                        //         typeText(0);
-                        //     } else {
-                        //         socket.emit("setWord", word, true);
-                        //     }
-                        // }
-
+                        worddisplay.textContent = "Prediction: " + word;
+                        
                         const dictionarySpan = document.querySelector('.dictionary') // the same as the word display but is shorter :)
                         dictionarySpan.style.color = '#9142ff';
                         worddisplay.style.fontWeight = "bold";

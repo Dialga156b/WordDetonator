@@ -420,7 +420,7 @@
                                 i++;
                                 //console.log(wordInput.value);
                                 socket.emit("setWord", wordInput.value, false);
-                                await new Promise(resolve => setTimeout(resolve, getRandomInt(20, 150)));
+                                await new Promise(resolve => setTimeout(resolve, getRandomInt(35, 150)));
                                 await typeWriter();
                             }
                         }

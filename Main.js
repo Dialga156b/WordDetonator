@@ -404,7 +404,7 @@
                   );
 
                   if (!isHumanizerEnabled)  {
-                      socket.emit("setWord", wordInput.value, true);
+                      socket.emit("setWord", word, true);
                       return
                   }
                 

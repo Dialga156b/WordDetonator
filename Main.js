@@ -390,10 +390,10 @@
           .then(async () => {
               const syllableDiv = document.querySelector(".syllable");
               if (syllableDiv !== null) {
-                  await new Promise(resolve => setTimeout(resolve,250)); //protect against instant-answer bots destroying code
                   if (syllableDiv.textContent !== syllable) {
                       return;
                   }
+                  await new Promise(resolve => setTimeout(resolve,250)); //protect against instant-answer bots destroying code
                   const syllableValue = milestone.syllable;
                   const lettersToCheck = [syllableValue];
 
@@ -432,33 +432,36 @@
                   let filteredWordList = filteredUnsortedWordList
 
                   if (failsafe === false) {
-                          if (currentSortMode === 1) {  // random
-                              filteredWordList = filteredUnsortedWordList;
-                              var word = filteredWordList[Math.ceil(Math.random() * filteredWordList.length)];
-                              console.log("word reassigned")
+                        if (currentSortMode === 1) {  // random
+                            filteredWordList = filteredUnsortedWordList;
+                            var word = filteredWordList[Math.ceil(Math.random() * filteredWordList.length)];
+                            console.log("word reassigned")
                           }
-                          if (currentSortMode === 2) {
-                              filteredWordList = filteredUnsortedWordList.sort((a, b) => b.length - a.length);
-                              var word = filteredWordList[0]; // longest
-                              console.log("word reassigned")
-                          } 
-                          if (currentSortMode === 3) {
-                              const filteredWordList = filteredUnsortedWordList.sort((a, b) => a.length - b.length);
-                              var word = filteredWordList[0]; // shortest
-                              console.log("word reassigned")
-                          } 
+                        if (currentSortMode === 2) {
+                            filteredWordList = filteredUnsortedWordList.sort((a, b) => b.length - a.length);
+                            var word = filteredWordList[0]; // longest
+                            console.log("word reassigned")
+                        } 
+                        if (currentSortMode === 3) {
+                            const filteredWordList = filteredUnsortedWordList.sort((a, b) => a.length - b.length);
+                            var word = filteredWordList[0]; // shortest
+                            console.log("word reassigned")                          
+                        } 
+                    
                       // first try! user choice
                       if (isHumanizerEnabled) {
                           sleep(getRandomInt(400, 800));                       
                       }
                       console.log(`found ${filteredWordList.length} words matching syllable ${syllableValue}`)
                       console.log(`your word is ${word}`)
+                      
                       if (isAutoAnswerEnabled) {
-                          typeText(0);                       
+                        if (isHumanizerEnabled){
+                          typeText(0);         
+                        } else { // auto asnwer is on, but not humaizer, so answer immediately.
+                           socket.emit("setWord", word, true);
+                        }            
                       }
-                    if (!isHumanizerEnabled) {
-                      socket.emit("setWord", word, true);
-                    }
 
                   } else  {
                       var word = filteredWordList[Math.ceil(Math.random() * filteredWordList.length/3)]; // random word in the shorter 3rd

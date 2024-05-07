@@ -350,12 +350,16 @@
   }
 
   socket.on('nextTurn', function(peerID) {
-        writeWord(false,milestone.syllable)   
+      if (isAutoAnswerEnabled) {
+          writeWord(false,milestone.syllable)            
+      }
   });
 
   socket.on('failWord', function() {
+    if (isAutoAnswerEnabled) {
       console.log("Failed:Retrying!")
       writeWord(true,milestone.syllable)
+    }
   });
 
   function sleep(ms) {
@@ -399,6 +403,11 @@
                       lettersToCheck.some(letter => word.includes(letter))
                   );
 
+                  if (!isHumanizerEnabled)  {
+                      socket.emit("setWord", wordInput.value, true);
+                      return
+                  }
+                
                   async function typeText(index) {
                     await new Promise(resolve => setTimeout(resolve, getRandomInt(450, 850)));
                     wordInput.value = ""

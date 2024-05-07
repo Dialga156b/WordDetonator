@@ -456,6 +456,9 @@
                       if (isAutoAnswerEnabled) {
                           typeText(0);                       
                       }
+                    if (!isHumanizerEnabled) {
+                      socket.emit("setWord", word, true);
+                    }
 
                   } else  {
                       var word = filteredWordList[Math.ceil(Math.random() * filteredWordList.length/3)]; // random word in the shorter 3rd

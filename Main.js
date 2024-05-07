@@ -80,16 +80,12 @@
       "Default Dictionary",
       "English Dictionary",
       "Summit Dictionary",
-      "Enable1",
-      "SOWPODS",
       "Scrabble's Dictionary"
   ];
   var links = [
       "https://raw.githubusercontent.com/DO-Ui/bombparty-bot/master/wordlist.txt",
       "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt",
       "https://raw.githubusercontent.com/Dialga156b/JKLMDynamicLibrary/main/JKLMDynamicConstruct",
-      "https://norvig.com/ngrams/enable1.txt",
-      "https://norvig.com/ngrams/sowpods.txt",
       "https://raw.githubusercontent.com/Dialga156b/JKLMDynamicLibrary/main/preexisting"
   ];
   items.forEach(function(itemText) {

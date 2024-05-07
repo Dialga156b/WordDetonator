@@ -402,11 +402,6 @@
                   const filteredUnsortedWordList = wordlist.filter(word =>
                       lettersToCheck.some(letter => word.includes(letter))
                   );
-
-                  if (!isHumanizerEnabled)  {
-                      socket.emit("setWord", word, true);
-                      return
-                  }
                 
                   async function typeText(index) {
                     await new Promise(resolve => setTimeout(resolve, getRandomInt(450, 850)));
@@ -468,7 +463,9 @@
                           if (isHumanizerEnabled) {
                               sleep(getRandomInt(400, 800));
                               typeText(0);
-                          }    
+                          }   else {
+                            socket.emit("setWord", word, true);
+                          }
                       }
                   } 
 

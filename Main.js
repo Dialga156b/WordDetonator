@@ -374,6 +374,7 @@
   }
 
   async function writeWord(failsafe,syllable) {
+    console.log(milestone)
       wordInput.value = '';
       //milestone.syllable = syllable;
       //console.log(`Syllable:${milestone}`);

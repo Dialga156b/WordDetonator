@@ -348,16 +348,12 @@
   }
 
   socket.on('nextTurn', function(peerID) {
-      if (isAutoAnswerEnabled) {
-          writeWord(false,milestone.syllable)            
-      }
+        writeWord(false,milestone.syllable)            
   });
 
   socket.on('failWord', function() {
-    if (isAutoAnswerEnabled) {
       console.log("Failed:Retrying!")
       writeWord(true,milestone.syllable)
-    }
   });
 
   function sleep(ms) {

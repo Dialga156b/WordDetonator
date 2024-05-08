@@ -380,10 +380,10 @@
     console.log("milestone updated!")
       if (newMilestone.name == 'seating') {
         socket.emit("joinRound")
-        statusLabel.textContent = "Status: Waiting"
+        statusLabel.textContent = "Status: Joined Round!"
         console.log("Joined round successfully!")
       } else{
-         statusLabel.textContent = "Status: Waiting"
+         statusLabel.textContent = "Status: Waiting.."
       }
   });
 

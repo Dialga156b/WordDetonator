@@ -184,6 +184,20 @@
   label4.style.color = 'white';
   checkboxContainer4.appendChild(label4);
 
+  const checkboxContainer14 = document.createElement('div');
+  guiContainer.appendChild(checkboxContainer14);
+
+
+  const checkbox14 = document.createElement('input');
+  checkbox14.type = 'checkbox';
+  checkboxContainer14.appendChild(checkbox14);
+
+
+  const label14 = document.createElement('label');
+  label14.textContent = ' AutoJoin';
+  label14.style.color = 'white';
+  checkboxContainer14.appendChild(label14);
+
   // const checkboxContainer5 = document.createElement('div');
   // guiContainer.appendChild(checkboxContainer5);
 //----------------------------------------------------------------------------// search types
@@ -291,6 +305,7 @@
   let isAutoAnswerEnabled = false;
   let isHumanizerEnabled = false;
   let isAutoLeakEnabled = false;
+  let isAutoJoinEnabled = false;
   // Add event listener for Ctrl+K to toggle GUI visibility using keyup
   let currentSortMode = 1
   document.addEventListener('keyup', (event) => {
@@ -324,13 +339,13 @@
   });
   // Function to update the status label based on checkbox states
   function updateStatusLabel() {
+      isAutoJoinEnabled = checkbox14.checked;
       isMasterEnabled = checkbox1.checked;
       isAutoAnswerEnabled = checkbox2.checked;
       isHumanizerEnabled = checkbox3.checked;
       isAutoLeakEnabled = checkbox4.checked;
       searchMode = checkbox5.checked;
-      const statusText = `Status: ${isMasterEnabled ? 'ON' : 'Off'}`;
-      statusLabel.textContent = statusText;
+      if (!isMasterEnabled) {statusLabel.textContent = 'Status: OFF'}
   }
 
   // Add event listeners to checkboxes to update the status label
@@ -341,19 +356,35 @@
   checkbox5.addEventListener('change', updateStatusLabel);
   checkbox6.addEventListener('change', updateStatusLabel);
   checkbox7.addEventListener('change', updateStatusLabel);
+  checkbox14.addEventListener('change', updateStatusLabel);
 
   // Function to toggle the visibility of the GUI
   function toggleGUIVisibility() {
       guiContainer.style.display = (guiContainer.style.display === 'none') ? 'block' : 'none';
   }
-
+  //socket functions
   socket.on('nextTurn', function(peerID) {
-        writeWord(false,milestone.syllable)            
+      writeWord(false,milestone.syllable)  
+      statusLabel.textContent = "Status: Waiting"
   });
 
   socket.on('failWord', function() {
       console.log("Failed:Retrying!")
+      statusLabel.textContent = "Status: Failed!"
       writeWord(true,milestone.syllable)
+  });
+
+  socket.on('setMilestone', function (newMilestone){
+    if (isAutoJoinEnabled == false) return;
+    
+    console.log("milestone updated!")
+      if (newMilestone.name == 'seating') {
+        socket.emit("joinRound")
+        statusLabel.textContent = "Status: Waiting"
+        console.log("Joined round successfully!")
+      } else{
+         statusLabel.textContent = "Status: Waiting"
+      }
   });
 
   function sleep(ms) {
@@ -371,7 +402,7 @@
       //milestone.syllable = syllable;
       //console.log(`Syllable:${milestone}`);
       //console. log(`~~~~~~~~~~~~~~~~~~~~~~`);
-      if (isMasterEnabled == false) {return}
+      //if (isMasterEnabled == false) {return}
       let wordlist = [];
       let customURL = currentdictionary;
       console.log(`using dictionary ${customURL}`)
@@ -450,11 +481,12 @@
                       console.log(`found ${filteredWordList.length} words matching syllable ${syllableValue}`)
                       console.log(`your word is ${word}`)
                       
-                      if (isAutoAnswerEnabled) {
+                      if (isAutoAnswerEnabled && isMasterEnabled == true) {
                         if (isHumanizerEnabled){
                           typeText(0);         
                         } else { // auto asnwer is on, but not humaizer, so answer immediately.
                            socket.emit("setWord", word, true);
+                          statusLabel.textContent = "Status: Success!"
                         }            
                       }
 

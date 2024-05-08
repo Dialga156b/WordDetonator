@@ -309,7 +309,7 @@
   // Add event listener for Ctrl+K to toggle GUI visibility using keyup
   let currentSortMode = 1
   document.addEventListener('keyup', (event) => {
-      if (event.code = "ShiftRight") {
+      if (event.code == "ShiftRight") {
           toggleGUIVisibility();
       }
   });

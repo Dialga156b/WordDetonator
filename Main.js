@@ -264,7 +264,7 @@
 
 
   const watermark = document.createElement('label');
-  watermark.textContent = 'Ctrl+K to toggle';
+  watermark.textContent = 'RSHIFT to toggle';
   watermark.style.color = 'white';
   watermarkContainer.appendChild(watermark);
 
@@ -294,7 +294,7 @@
   // Add event listener for Ctrl+K to toggle GUI visibility using keyup
   let currentSortMode = 1
   document.addEventListener('keyup', (event) => {
-      if (event.ctrlKey && event.key === 'k') {
+      if (event.code = "ShiftRight") {
           toggleGUIVisibility();
       }
   });

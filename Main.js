@@ -198,6 +198,20 @@
   label14.style.color = 'white';
   checkboxContainer14.appendChild(label14);
 
+  const checkboxContainer15 = document.createElement('div');
+  guiContainer.appendChild(checkboxContainer15);
+
+
+  const checkbox15 = document.createElement('input');
+  checkbox15.type = 'checkbox';
+  checkboxContainer15.appendChild(checkbox15);
+
+
+  const label15 = document.createElement('label');
+  label15.textContent = ' AutoLetter';
+  label15.style.color = 'white';
+  checkboxContainer15.appendChild(label15);
+
   // const checkboxContainer5 = document.createElement('div');
   // guiContainer.appendChild(checkboxContainer5);
 //----------------------------------------------------------------------------// search types
@@ -306,6 +320,7 @@
   let isHumanizerEnabled = false;
   let isAutoLeakEnabled = false;
   let isAutoJoinEnabled = false;
+  let isAutoLetterEnabled = false;
   // Add event listener for Ctrl+K to toggle GUI visibility using keyup
   let currentSortMode = 1
   document.addEventListener('keyup', (event) => {
@@ -345,6 +360,7 @@
       isHumanizerEnabled = checkbox3.checked;
       isAutoLeakEnabled = checkbox4.checked;
       searchMode = checkbox5.checked;
+      isAutoLetterEnabled - checkbox15.checked;
       if (!isMasterEnabled) {statusLabel.textContent = 'Status: OFF'}
   }
 
@@ -357,6 +373,7 @@
   checkbox6.addEventListener('change', updateStatusLabel);
   checkbox7.addEventListener('change', updateStatusLabel);
   checkbox14.addEventListener('change', updateStatusLabel);
+  checkbox15.addEventListener('change', updateStatusLabel);
 
   // Function to toggle the visibility of the GUI
   function toggleGUIVisibility() {

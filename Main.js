@@ -513,7 +513,7 @@
                                       RemainingLetters.push(letter);
                                   }
                               }
-                          
+                              console.log(RemainingLetters)
                               // Get 2 random items from RemainingLetters
                               const randomLetters = [];
                               if (RemainingLetters.length > 2) {

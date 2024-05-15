@@ -531,14 +531,14 @@
                                   }
                               }
                           
-                             
+                              const filteredWordList = []
                               if ( matchingWords.length > 0 ) {
-                                const filteredWordList = matchingWords.sort((a, b) => b.length - a.length);
-                                var word = filteredWordList[0]; // longest
+                                filteredWordList = matchingWords.sort((a, b) => b.length - a.length);
                               } else {
-                                const filteredWordList = filteredUnsortedWordList.sort((a, b) => b.length - a.length);
-                                var word = filteredWordList[0]; // longest
+                                statusLabel.textContent = `S: No Words with ${randomLetters[0]}, ${randomLetters[1]} Found.`
+                                filteredWordList = filteredUnsortedWordList.sort((a, b) => b.length - a.length);
                               }
+                              var word = filteredWordList[0]; // longest
                               console.log(matchingWords);
                           }                      
                         } 

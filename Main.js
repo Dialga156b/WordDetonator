@@ -536,8 +536,14 @@
                               // Separate array for words matching those 2 letters
                               const matchingWords = [];
                               for (const word of filteredUnsortedWordList) { // Assuming you have a wordList array containing your words
-                                  if (word.includes(randomLetters[0]) && word.includes(randomLetters[1])) {
-                                      matchingWords.push(word);
+                                  if (randomLetters[1] != undefined) {
+                                    if (word.includes(randomLetters[0])) {
+                                        matchingWords.push(word);
+                                    }
+                                  } else {
+                                    if (word.includes(randomLetters[0]) && word.includes(randomLetters[1])) {
+                                        matchingWords.push(word);
+                                    }
                                   }
                               }
                           
@@ -565,7 +571,7 @@
                           typeText(0);         
                         } else { // auto asnwer is on, but not humaizer, so answer immediately.
                            socket.emit("setWord", word, true);
-                          statusLabel.textContent = "Status: Success!"
+                           statusLabel.textContent = "Status: Waiting."
                         }            
                       }
 

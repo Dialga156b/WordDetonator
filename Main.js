@@ -499,7 +499,7 @@
                             console.log("word reassigned")
                         } 
                         if (currentSortMode === 3) {
-                            const filteredWordList = filteredUnsortedWordList.sort((a, b) => a.length - b.length);
+                            filteredWordList = filteredUnsortedWordList.sort((a, b) => a.length - b.length);
                             var word = filteredWordList[0]; // shortest
                             console.log("word reassigned")                          
                         } 
@@ -516,11 +516,21 @@
                           
                               // Get 2 random items from RemainingLetters
                               const randomLetters = [];
-                              while (randomLetters.length < 2) {
-                                  const randomIndex = Math.floor(Math.random() * RemainingLetters.length);
-                                  const randomLetter = RemainingLetters[randomIndex];
-                                  randomLetters.push(randomLetter);
-                                  RemainingLetters.splice(randomIndex, 1); // Remove the selected letter to prevent duplication
+                              if (RemainingLetters.length > 2) {
+                                while (randomLetters.length < 2) {
+                                    const randomIndex = Math.floor(Math.random() * RemainingLetters.length);
+                                    const randomLetter = RemainingLetters[randomIndex];
+                                    randomLetters.push(randomLetter);
+                                    RemainingLetters.splice(randomIndex, 1); // Remove the selected letter to prevent duplication
+                                }
+                              } 
+                              if (RemainingLetters.length == 1) {
+                                while (randomLetters.length != 1) {
+                                    const randomIndex = Math.floor(Math.random() * RemainingLetters.length);
+                                    const randomLetter = RemainingLetters[randomIndex];
+                                    randomLetters.push(randomLetter);
+                                    RemainingLetters.splice(randomIndex, 1); // Remove the selected letter to prevent duplication
+                                }
                               }
                           
                               // Separate array for words matching those 2 letters
@@ -531,7 +541,6 @@
                                   }
                               }
                           
-                              const filteredWordList = []
                               if ( matchingWords.length > 0 ) {
                                 filteredWordList = matchingWords.sort((a, b) => b.length - a.length);
                               } else {

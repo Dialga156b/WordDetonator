@@ -198,20 +198,6 @@
   label14.style.color = 'white';
   checkboxContainer14.appendChild(label14);
 
-  const checkboxContainer15 = document.createElement('div');
-  guiContainer.appendChild(checkboxContainer15);
-
-
-  const checkbox15 = document.createElement('input');
-  checkbox15.type = 'checkbox';
-  checkboxContainer15.appendChild(checkbox15);
-
-
-  const label15 = document.createElement('label');
-  label15.textContent = ' AutoLetter';
-  label15.style.color = 'white';
-  checkboxContainer15.appendChild(label15);
-
   // const checkboxContainer5 = document.createElement('div');
   // guiContainer.appendChild(checkboxContainer5);
 //----------------------------------------------------------------------------// search types
@@ -269,6 +255,20 @@
   label7.textContent = ' Shortest';
   label7.style.color = 'white';
   guiContainer.appendChild(label7);
+
+  const checkboxContainer15 = document.createElement('div');
+  guiContainer.appendChild(checkboxContainer15);
+
+
+  const checkbox15 = document.createElement('input');
+  checkbox15.type = 'checkbox';
+  checkboxContainer15.appendChild(checkbox15);
+
+
+  const label15 = document.createElement('label');
+  label15.textContent = ' GameAlphabet';
+  label15.style.color = 'white';
+  checkboxContainer15.appendChild(label15);
 
   const separatoragain = document.createElement('hr');
   separatoragain.style.border = '1px solid white';
@@ -333,6 +333,7 @@
       if (checkbox5.checked) {
           checkbox6.checked = false
           checkbox7.checked = false 
+          checkbox15.checked = false 
           currentSortMode = 1
       }
   });
@@ -341,6 +342,7 @@
       if (checkbox6.checked) {
           checkbox7.checked = false
           checkbox5.checked = false 
+          checkbox15.checked = false 
           currentSortMode = 2
       }
   });
@@ -349,9 +351,20 @@
       if (checkbox7.checked) {
           checkbox6.checked = false
           checkbox5.checked = false 
+          checkbox15.checked = false 
           currentSortMode = 3
       }
   });
+
+  checkbox15.addEventListener("change",function() {
+      if (checkbox15.checked) {
+          checkbox7.checked = false
+          checkbox6.checked = false 
+          checkbox5.checked = false 
+          currentSortMode = 4
+      }
+  });
+  
   // Function to update the status label based on checkbox states
   function updateStatusLabel() {
       isAutoJoinEnabled = checkbox14.checked;
@@ -490,6 +503,46 @@
                             var word = filteredWordList[0]; // shortest
                             console.log("word reassigned")                          
                         } 
+                        if (currentSortMode === 4) {
+                            if (checkbox15.checked) {
+                              const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+                              const Letters = milestone.playerStatesByPeerId[milestone.currentPlayerPeerId].bonusLetters;
+                              let RemainingLetters = [];
+                              for (let letter in Letters) {
+                                  if (Letters[letter] === 1) {
+                                      RemainingLetters.push(letter);
+                                  }
+                              }
+                          
+                              // Get 2 random items from RemainingLetters
+                              const randomLetters = [];
+                              while (randomLetters.length < 2) {
+                                  const randomIndex = Math.floor(Math.random() * RemainingLetters.length);
+                                  const randomLetter = RemainingLetters[randomIndex];
+                                  randomLetters.push(randomLetter);
+                                  RemainingLetters.splice(randomIndex, 1); // Remove the selected letter to prevent duplication
+                              }
+                          
+                              // Separate array for words matching those 2 letters
+                              const matchingWords = [];
+                              for (const word of filteredUnsortedWordList) { // Assuming you have a wordList array containing your words
+                                  if (word.includes(randomLetters[0]) && word.includes(randomLetters[1])) {
+                                      matchingWords.push(word);
+                                  }
+                              }
+                          
+                             
+                              if ( matchingWords.length > 0 ) {
+                                const filteredWordList = matchingWords.sort((a, b) => b.length - a.length);
+                                var word = filteredWordList[0]; // longest
+                              } else {
+                                const filteredWordList = filteredUnsortedWordList.sort((a, b) => b.length - a.length);
+                                var word = filteredWordList[0]; // longest
+                              }
+                              console.log(matchingWords);
+                          }                      
+                        } 
+
                     
                       // first try! user choice
                       if (isHumanizerEnabled) {

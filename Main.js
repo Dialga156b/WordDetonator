@@ -525,7 +525,7 @@
                                 }
                               } 
                               if (RemainingLetters.length == 1) {
-                                while (randomLetters.length != 1) {
+                                while (randomLetters.length < 1) {
                                     const randomIndex = Math.floor(Math.random() * RemainingLetters.length);
                                     const randomLetter = RemainingLetters[randomIndex];
                                     randomLetters.push(randomLetter);

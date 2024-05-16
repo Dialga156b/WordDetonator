@@ -437,7 +437,7 @@
       let customURL = currentdictionary;
       console.log(`using dictionary ${customURL}`)
       //console.log("nextturn!")
-      fetch(`${customURL}`)
+      await fetch(`${customURL}`)
       .then(response => response.text())
       .then(data => {
         wordlist = data.split(`\n`);

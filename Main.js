@@ -566,7 +566,7 @@
                       console.log(`found ${filteredWordList.length} words matching syllable ${syllableValue}`)
                       console.log(`your word is ${word}`)
                       
-                      if (isAutoAnswerEnabled && isMasterEnabled == true && milestone.currentPlayerPeerId = selfPeerId) {
+                      if (isAutoAnswerEnabled == true && isMasterEnabled == true && milestone.currentPlayerPeerId = selfPeerId) {
                         if (isHumanizerEnabled){
                           typeText(0);         
                         } else { // auto asnwer is on, but not humaizer, so answer immediately.
@@ -577,7 +577,7 @@
 
                   } else  {
                       var word = filteredWordList[Math.ceil(Math.random() * filteredWordList.length/3)]; // random word in the shorter 3rd
-                      if (isAutoAnswerEnabled && milestone.currentPlayerPeerId = selfPeerId) {
+                      if (isAutoAnswerEnabled == true && milestone.currentPlayerPeerId = selfPeerId) {
                           if (isHumanizerEnabled) {
                               sleep(getRandomInt(400, 800));
                               typeText(0);

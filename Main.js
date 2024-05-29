@@ -532,7 +532,10 @@
                                     RemainingLetters.splice(randomIndex, 1); // Remove the selected letter to prevent duplication
                                 }
                               }
-                          
+                              if (RemainingLetters[1] == 'undefined') {
+                                RemainingLetters[1] = RemainingLetters[0]
+                              }
+                              
                               // Separate array for words matching those 2 letters
                               const matchingWords = [];
                               for (const word of filteredUnsortedWordList) { // Assuming you have a wordList array containing your words
@@ -546,7 +549,7 @@
                                     }
                                   }
                               }
-                          
+                              
                               if ( matchingWords.length > 0 ) {
                                 filteredWordList = matchingWords.sort((a, b) => b.length - a.length);
                               } else {

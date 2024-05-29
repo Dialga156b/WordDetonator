@@ -532,8 +532,8 @@
                                     RemainingLetters.splice(randomIndex, 1); // Remove the selected letter to prevent duplication
                                 }
                               }
-                              if (RemainingLetters[1] == 'undefined') {
-                                RemainingLetters[1] = RemainingLetters[0]
+                              if (randomLetters[1] == 'undefined') {
+                                randomLetters[1] = randomLetters[0]
                               }
                               
                               // Separate array for words matching those 2 letters

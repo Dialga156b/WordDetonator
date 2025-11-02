@@ -30,7 +30,6 @@
     }
   });
 
-  // Adding Watermark Image
   const watermarkImage = document.createElement('img');
   watermarkImage.src = 'https://i.postimg.cc/X75Rdjw7/sai.png';
   watermarkImage.style.width = '50px';
@@ -41,14 +40,12 @@
   label0.style.color = 'white';
   guiContainer.appendChild(label0);
 
-  // Adding Line Separator
   const separatorLine = document.createElement('hr');
   separatorLine.style.border = '1px solid white';
   separatorLine.style.marginTop = '10px';
   separatorLine.style.marginBottom = '10px';
   guiContainer.appendChild(separatorLine);
 
-  // Adding Textbox
   const DictionaryLabel = document.createElement('label');
   DictionaryLabel.textContent = 'Default Dataset';
   DictionaryLabel.style.color = 'white';
@@ -117,7 +114,6 @@
   const hoohaah = document.createElement('div');
   guiContainer.appendChild(hoohaah);
 
-  // Adding Checkbox Container
   const checkboxContainer1 = document.createElement('div');
   guiContainer.appendChild(checkboxContainer1);
 
@@ -178,7 +174,6 @@
   label14.style.color = 'white';
   checkboxContainer14.appendChild(label14);
 
-  // Search types
   const STseparatorLine = document.createElement('hr');
   STseparatorLine.style.border = '1px solid white';
   STseparatorLine.style.marginTop = '10px';
@@ -247,7 +242,6 @@
   separatoragain.style.marginBottom = '10px';
   guiContainer.appendChild(separatoragain);
 
-  // Statuses
   const statusLabel = document.createElement('label');
   statusLabel.textContent = 'Status: OFF';
   statusLabel.style.color = 'white';
@@ -280,7 +274,6 @@
   watermark3.style.color = 'white';
   watermarkContainer3.appendChild(watermark3);
 
-  // State variables
   let isMasterEnabled = false;
   let isAutoAnswerEnabled = false;
   let isHumanizerEnabled = false;
@@ -357,7 +350,6 @@
     guiContainer.style.display = (guiContainer.style.display === 'none') ? 'block' : 'none';
   }
 
-  // Socket functions
   socket.on('nextTurn', function(peerID) {
     writeWord(false, milestone.syllable);
     statusLabel.textContent = "Status: Waiting";
